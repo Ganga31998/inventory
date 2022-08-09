@@ -1,5 +1,5 @@
 
-{% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,6 +12,7 @@
     <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-success sticky-top">
         <div class="container-fluid">
           <a class="navbar-brand fw-bold text-black" href="/">Home</a>
@@ -34,6 +35,10 @@
           </div>
         </div>
       </nav>
+       <div><img style="  height: 550px; width: 100%;"  src='one.jpeg' alt="My image">
+
+    </div>
+
       {% block body %}
       {% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
