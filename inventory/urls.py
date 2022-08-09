@@ -33,5 +33,6 @@ urlpatterns = [
     path('deleteinput/delete/', DeleteView.as_view()),
     path('updateinput/', UpdateInputView.as_view()),
     path('updateinput/update/', UpdateView.as_view()),
+    path("logout/",logoutPage, name="logoutPage"),
 
 ]
