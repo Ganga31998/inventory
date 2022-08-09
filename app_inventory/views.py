@@ -1,14 +1,22 @@
-from django.shortcuts import render,redirect
-from django.views import View
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from .models import Product
-from .forms import *
 
+from django.views import View
+from django.conf import settings
+
+from .models import *
+from .forms import *
 # Create your views here.
+def index(request):
+    return render(request, "index.html")
+
 class Home(View):
     def get(self,request):
         return render(request,"login.html")
+
 def registerPage(request):
     form = createuserform()
     cust_form = createcustomerform()
@@ -31,22 +39,35 @@ def loginPage(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+        user_type = request.POST.get('user_type')
+        user = authenticate(request, username=username, password=password, user_type = user_type)
         print(user)
         if user is not None:
             qs=User.objects.filter(is_staff=True,username=username)
             if qs:
                 login(request,user)
-                return redirect('admin.html')
+                return redirect('Home')
+            elif(username == 'vedha'):
+                login(request, user)
+                return redirect('Display')
+
             else:
                 login(request, user)
-                return redirect('home.html')
+                return redirect('Home')
+
     context = {}
     return render(request, 'Login.html', context)
+
+
+
+class AdminpageView(View):
+    def get(self, request):
+        return render(request, 'admin.html')
 
 class HomeView(View):
     def get(self,request):
         return render(request,'home.html')
+
 class InsertInput(View):
     def get(self,request):
         return render(request,'productinput.html')
@@ -67,7 +88,9 @@ class DisplayView(View):
         qs=Product.objects.all()
         con_dic={"records":qs}
         return render(request,"display.html",con_dic)
+
 class DeleteInputView(View):
+
     def get(self,request):
         return render(request,"deleteinput.html")
 class DeleteView(View):

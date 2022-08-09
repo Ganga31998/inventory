@@ -7,11 +7,15 @@ from django.contrib.auth.models import User
 class createuserform(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username']
+        fields = ['username','password']
 
 
-class createcustomerform(ModelForm):
+class addproduct(ModelForm):
     class Meta:
-        model = u_type
+        model =Product
         fields = '__all__'
-        exclude = ['user']
+
+class addu_type(ModelForm):
+    class Meta:
+        model=u_type
+        fields='__all__'

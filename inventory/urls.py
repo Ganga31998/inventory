@@ -19,15 +19,19 @@ from django import views
 from app_inventory.views import *
 
 urlpatterns = [
+    path("",index,name="index.html"),
+
     path('admin/', admin.site.urls),
-    path('login/',Home.as_view()),
-    path('modelapp/',HomeView.as_view()),
-    path('modelapp/insertinput/',InsertInput.as_view()),
-    path('modelapp/insertinput/insert/',InserView.as_view()),
-    path('modelapp/display/',DisplayView.as_view()),
-    path('modelapp/deleteinput/',DeleteInputView.as_view()),
-    path('modelapp/deleteinput/delete/',DeleteView.as_view()),
-    path('modelapp/updateinput/',UpdateInputView.as_view()),
-    path('modelapp/updateinput/update/',UpdateView.as_view()),
+    path('adminpage/', AdminpageView.as_view(), name = 'adminpage'),
+
+    path('login/', loginPage, name ='login'),
+    path('Home/', HomeView.as_view(), name = 'Home'),
+    path('insertinput/', InsertInput.as_view()),
+    path('insertinput/insert/', InserView.as_view()),
+    path('display/', DisplayView.as_view(), name = 'Display'),
+    path('deleteinput/', DeleteInputView.as_view()),
+    path('deleteinput/delete/', DeleteView.as_view()),
+    path('updateinput/', UpdateInputView.as_view()),
+    path('updateinput/update/', UpdateView.as_view()),
 
 ]
